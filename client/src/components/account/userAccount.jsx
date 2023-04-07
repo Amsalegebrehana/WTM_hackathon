@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, ListGroup, Image } from "react-bootstrap";
 import woman from "../../woman.png"
 import { useContext } from "react";
 import { SignUpContext } from "../auth/Authcontext.js";
+import AppointmentHistory from "./appoitmentHistory";
 
 const AccountPage = () => {
     const {
@@ -66,14 +67,15 @@ const AccountPage = () => {
                         <Card.Body>
                             <Card.Title>Appointment History</Card.Title>
                             <ListGroup variant="flush">
-                                {user.appointments.map((appointment) => (
+                                {/* {user.appointments.map((appointment) => (
                                     <ListGroup.Item key={appointment.id}>
                                         <div>Date: {appointment.date}</div>
                                         <div>Time: {appointment.time}</div>
                                         <div>Doctor: {appointment.doctor}</div>
                                         <div>Department: {appointment.department}</div>
                                     </ListGroup.Item>
-                                ))}
+                                ))} */}
+                                <AppointmentHistory/>
                             </ListGroup>
                         </Card.Body>
                     </Card>

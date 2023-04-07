@@ -28,6 +28,7 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showProfile, setShowProfile] = useState(false);
+  const [signOut, setSignOut] = useState(false);
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);
@@ -60,6 +61,10 @@ function App() {
     console.log(userData);
     // perform sign up logic here
   };
+
+  const handleSignOut = (event) => {
+    setSignOut(event)
+  }
 
   const handleShowProfile = (event) => {
     setShowProfile(event)
@@ -106,6 +111,7 @@ function App() {
     confirmPassword,
     showProfile,
     phoneNumber,
+    signOut,
     handleFullNameChange,
     handleEmailChange,
     handleDateOfBirthChange,
@@ -114,7 +120,8 @@ function App() {
     handleConfirmPasswordChange,
     handleSignUp,
     handleShowProfile,
-    handlePhoneNumberChange
+    handlePhoneNumberChange,
+    handleSignOut
   };
   return (
     <div className="App">

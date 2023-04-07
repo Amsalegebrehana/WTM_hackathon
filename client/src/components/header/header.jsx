@@ -6,7 +6,7 @@ import "./header.css"
 
 function Header() {
   const {
-    showProfile
+    showProfile,handleSignOut
   } = useContext(SignUpContext);
   // Handle sign-in
  
@@ -45,11 +45,22 @@ function Header() {
                   <a class="nav-link" href="/contact">Contact</a>
                 </li>
                 {showProfile ? (
+                  <>
                   <li class="nav-item ml-auto">
                     <a class="nav-link" href="/account">
                       <img src={woman} alt="" height="30" />
                     </a>
                   </li>
+                   <li class="nav-item">
+                      <a
+                        class="nav-link btn btn btn-outline-primary px-3"
+                        href="/"
+                        onClick={() => {
+                          localStorage.removeItem('userData');
+                        }}
+                      >Sign Out</a>
+                    </li>
+                    </>
                 ) : (
                   <>
                     <li class="nav-item">

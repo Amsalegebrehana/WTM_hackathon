@@ -87,15 +87,6 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="form-group mt-1">
-          <label>Upload Photo</label>
-          <input
-            type="file"
-            className="form-control mt-1"
-            onChange={handlePhotoChange}
-            required
-          />
-        </div>
 
 
         <div className="form-group mt-3">
@@ -124,7 +115,7 @@ const SignUp = () => {
             className="btn btn-primary"
             onClick={
               () => {
-                console.log("hihilkjjnmjnkjnhjvhgfc ", showProfile,fullName);
+              
                 handleShowProfile(true)
                 
            

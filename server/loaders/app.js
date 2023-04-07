@@ -60,8 +60,12 @@ app.use(express.urlencoded({ extended: false }));
 // Set static folder
 app.use(express.static(path.join(process.cwd(), "public")));
 
-
+const userRouter = require("../api/user/router");
 // Handle URL which don't exist
+
+
+app.use("/api/v1/user", userRouter);
+
 app.use("*", (req, res, next) => {
   return next(
     new AppError(

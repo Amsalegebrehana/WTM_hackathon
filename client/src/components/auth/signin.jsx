@@ -43,7 +43,7 @@ const SignIn = (props) => {
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
-                Submit
+                Sign In
               </button>
             </div>
             <p className="text-center mt-2">

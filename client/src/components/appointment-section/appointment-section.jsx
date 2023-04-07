@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
 import Scheduler from '../scheduler/scheduler';
+import { SignUpContext } from '../auth/Authcontext.js';
+
 function AppointmentSection() {
+  const {
+    showProfile
+  } = useContext(SignUpContext);
+
+
     return (
       <>
         <section class="appoinment section">
@@ -18,7 +25,14 @@ function AppointmentSection() {
               </div>
 
               <div class="col-lg-8">
-                <Scheduler />
+                {showProfile ? (
+                  <Scheduler />
+                ) : (
+                  <div>
+                    <p>Please sign in to book an appointment</p>
+                    <a href="/signin"> <button className='btn btn-outline-primary' >Sign In</button></a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

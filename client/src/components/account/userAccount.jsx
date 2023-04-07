@@ -1,13 +1,23 @@
 import React from "react";
 import { Container, Row, Col, Card, ListGroup, Image } from "react-bootstrap";
 import woman from "../../woman.png"
+import { useContext } from "react";
+import { SignUpContext } from "../auth/Authcontext.js";
 
 const AccountPage = () => {
+    const {
+        fullName,
+        phoneNumber,
+        email,
+        dateOfBirth,
+        photo,
+        password,
+    } = useContext(SignUpContext);
     const user = {
-        name: "John Doe",
-        phone:"0912345678",
-        email: "johndoe@example.com",
-        dob:"12/12/2000",
+        name: fullName,
+        phone:phoneNumber,
+        email: email,
+        dob:dateOfBirth,
         avatar: woman,
         appointments: [
             {

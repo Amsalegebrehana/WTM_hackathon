@@ -306,7 +306,7 @@ function SignupProfessional() {
 
                                         <div className="d-grid gap-2 mt-3">
                                             <button type="submit" className="btn btn-primary mt-5">
-                                                Submit
+                                                Sign Up
                                             </button>
                                         </div>
                                         <p className="text-center mt-2">

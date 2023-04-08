@@ -68,7 +68,7 @@ function Footer() {
                 </ul>
               </div>
             </div>
-
+          
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="widget widget-contact mb-5 mb-lg-0">
                 <h4 class="text-capitalize mb-3">Get in Touch</h4>
@@ -79,11 +79,11 @@ function Footer() {
                     <i class="icofont-email mr-3"></i>
                     <span class="h6 mb-0">Support Available for 24/7</span>
                   </div>
-                  <h4 class="mt-2">
-                    <a href="mailto:autismworld082@gmail.com">
+               
+                    <a href="mailto:healthymworld082@gmail.com">
                       contact.healthyWoman@gmail.com
                     </a>
-                  </h4>
+               
                 </div>
 
                 <div class="footer-contact-block">
@@ -91,12 +91,14 @@ function Footer() {
                     <i class="icofont-support mr-3"></i>
                     <span class="h6 mb-0">Mon to Fri : 08:30 - 18:00</span>
                   </div>
-                  <h4 class="mt-2">
-                    <a href="tel:+251985767959">+251912 34 56 78</a>
-                  </h4>
-                  <h4 class="mt-2">
+                
+                    <a href="tel:+251985767959">
+                      <p> +251912 34 56 78</p>
+                     </a>
+                
+              
                     <a href="tel:+251917387771">+251910 11 12 13</a>
-                  </h4>
+            
                 </div>
               </div>
             </div>

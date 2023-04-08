@@ -17,7 +17,7 @@ import { SignUpContext } from './components/auth/Authcontext.js';
 import React, { useState, useEffect } from 'react';
 import { SignUpHPContext } from './components/auth/HealthProfessionalContext';
 import Home from "./Admin/Home";
-
+import SignUpAdmin from "../src/components/auth/signUpAdmin";
 
 
 
@@ -293,6 +293,7 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signupprofessional" element={<SignupProfessional />} />
+            <Route path="/adminsignin" element={<SignUpAdmin />} />
 
               <Route path="/account" element={<AccountPage />} />
               <Route path='/admin' element={<Home />} />

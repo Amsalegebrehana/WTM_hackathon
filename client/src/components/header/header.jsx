@@ -64,10 +64,13 @@ function Header() {
                 ) : (
                   <>
                     <li class="nav-item">
-                      <a class="nav-link btn btn-outline-primary mx-5 px-5" href="/signin">Sign In</a>
+                      <a class="nav-link  mx-5 px-2" href="/signin">Sign In</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link btn btn btn-outline-primary px-5" href="/signup">Sign Up</a>
+                      <a class="nav-link  " href="/signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link  " href="/adminsignin">Admin</a>
                     </li>
                   </>
                 )}

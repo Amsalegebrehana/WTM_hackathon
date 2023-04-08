@@ -48,8 +48,8 @@ while ussd_service is True:
                 customer_choice2 = int(input('Enter: '))
                 if customer_choice2 == 1:
                      print('Family Planing')
-                     print('1. Contraception\n')
-                     print('2. Abortion\n')
+                     print('There are different contraceptio methods and we also provide home to home servcen\n')
+                  
                      print('We give tranings for every one who want to give for special needs childrens love support teach')
                 elif customer_choice2 == 2:
                     print('Play therapy is helpfull for children with autism learn to interact with people in a way that they understand ....it is alsoo bring a child out of')

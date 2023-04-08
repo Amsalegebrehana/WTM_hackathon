@@ -23,12 +23,25 @@ const SignUp = () => {
     handleShowProfile
   } = useContext(SignUpContext);
 
+  const MIN_PASSWORD_LENGTH = 8;
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      alert(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long`);
+      return;
+    }
+
     const userData = { fullName, email, dateOfBirth, photo, password };
     handleSignUp(userData);
-  
+
+    // submit form if passwords match and meet validation rules
   };
 
   return (
@@ -95,6 +108,7 @@ const SignUp = () => {
             type="password"
             className="form-control mt-1"
             placeholder="Password"
+            value={password}
             onChange={handlePasswordChange}
             required
           />
@@ -105,10 +119,12 @@ const SignUp = () => {
             type="password"
             className="form-control mt-1"
             placeholder="Confirm Password"
+            value={confirmPassword}
             onChange={handleConfirmPasswordChange}
             required
           />
         </div>
+
         <div className="d-grid gap-2 mt-3">
           <button
             type="submit"

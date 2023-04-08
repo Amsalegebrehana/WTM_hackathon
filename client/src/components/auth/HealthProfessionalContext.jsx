@@ -1,3 +1,3 @@
 import React, { createContext, useState } from 'react';
 
-export const SignUpContext = createContext();
+export const SignUpHPContext = createContext();

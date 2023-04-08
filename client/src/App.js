@@ -15,6 +15,8 @@ import AccountPage from './components/account/userAccount';
 import SignUpPage from './components/auth/signupPage';
 import { SignUpContext } from './components/auth/Authcontext.js';
 import React, { useState, useEffect } from 'react';
+import { SignUpHPContext } from './components/auth/HealthProfessionalContext';
+import Home from "./Admin/Home";
 
 
 
@@ -29,6 +31,19 @@ function App() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showProfile, setShowProfile] = useState(false);
   const [signOut, setSignOut] = useState(false);
+
+
+  //HP attributes
+  const [fullNameHP, setFullNameHP] = useState('');
+  const [emailHP, setEmailHP] = useState('');
+  const [dateOfBirthHP, setDateOfBirthHP] = useState('');
+  const [photoHP, setPhotoHP] = useState(null);
+  const [passwordHP, setPasswordHP] = useState('');
+  const [phoneNumberHP, setPhoneNumberHP] = useState('');
+  const [confirmPasswordHP, setConfirmPasswordHP] = useState('');
+
+  const [professionalCertification, setProfessionalCertification] = useState(null);
+  const [department, setDepartment] = useState('');
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);
@@ -57,8 +72,58 @@ function App() {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSignUp = (userData) => {
+
+  //hp
+
+  const handleFullNameChangeHP = (event) => {
+    setFullNameHP(event.target.value);
+  };
+
+  const handleEmailChangeHP = (event) => {
+    setEmailHP(event.target.value);
+  };
+  const handlePhoneNumberChangeHP = (event) => {
+    setPhoneNumberHP(event.target.value);
+  }
+
+  const handleDateOfBirthChangeHP = (event) => {
+    setDateOfBirthHP(event.target.value);
+  };
+
+  const handlePhotoChangeHP = (event) => {
+    setPhotoHP(event.target.value);
+  };
+
+  const handlePasswordChangeHP = (event) => {
+    setPasswordHP(event.target.value);
+  };
+
+  const handleConfirmPasswordChangeHP = (event) => {
+    setConfirmPasswordHP(event.target.value);
+  };
+
+  const handleProfessionalCertification = (event) => {
+    setProfessionalCertification(event.target.value);
+  }
+
+  const handleDepartment = (event) => {
+    setDepartment(event.target.value);
+  }
+
+  const handleSignUp = async (userData) => {
     console.log(userData);
+    console.log(userData);
+    const response = await fetch('/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+
+    const data = await response.json();
+    console.log("user data",data);
+
     // perform sign up logic here
   };
 
@@ -69,6 +134,30 @@ function App() {
   const handleShowProfile = (event) => {
     setShowProfile(event)
   }
+
+
+  const [availability, setAvailability] = useState({
+    monday: { start: "", end: "" },
+    tuesday: { start: "", end: "" },
+    wednesday: { start: "", end: "" },
+    thursday: { start: "", end: "" },
+    friday: { start: "", end: "" },
+    saturday: { start: "", end: "" },
+    sunday: { start: "", end: "" },
+  });
+
+
+  const handleAvailablity = (e) => {
+    const { name, value } = e.target;
+    const [day, time] = name.split("-");
+    setAvailability((prevState) => ({
+      ...prevState,
+      [day]: {
+        ...prevState[day],
+        [time]: value,
+      },
+    }));
+  };
 
  useEffect(() => {
   const storedUserData = JSON.parse(localStorage.getItem('userData'));
@@ -100,6 +189,69 @@ function App() {
   }, [fullName, email, dateOfBirth, photo, password, phoneNumber, showProfile]);
 
 
+  //hp store it to localstorage
+  useEffect(() => {
+    const storedUserData = JSON.parse(localStorage.getItem('hpData'));
+    if (storedUserData) {
+      const latestUserData = storedUserData[storedUserData.length - 1];
+      setFullNameHP(latestUserData.fullNameHP);
+      setEmailHP(latestUserData.emailHP);
+      setDateOfBirthHP(latestUserData.dateOfBirthHP);
+      setPhotoHP(latestUserData.photoHP);
+      setPasswordHP(latestUserData.passwordHP);
+      setProfessionalCertification(latestUserData.professionalCertification);
+      setDepartment(latestUserData.department);
+      setAvailability(latestUserData.availability);
+    }
+  }, []);
+
+
+  // Save user data to browser storage when it changes
+  useEffect(() => {
+    if (fullNameHP && emailHP && dateOfBirthHP && availability && photoHP && passwordHP && professionalCertification && department) {
+      let userData = JSON.parse(localStorage.getItem('hpData')) || [];
+      if (!Array.isArray(userData)) {
+        userData = [userData]; // convert to an array if it's not already
+      }
+      userData.push({
+        fullNameHP,
+        emailHP,
+        dateOfBirthHP,
+        photoHP,
+        passwordHP,
+        professionalCertification,
+        department,
+        availability
+      });
+      localStorage.setItem('hpData', JSON.stringify(userData));
+    }
+  }, [fullNameHP, emailHP, dateOfBirthHP, availability, photoHP, passwordHP, professionalCertification, department]);
+
+
+  const valuesHP = {
+    fullNameHP,
+    emailHP,
+    dateOfBirthHP,
+    photoHP,
+    passwordHP,
+    confirmPasswordHP,
+
+    phoneNumberHP,
+    availability,
+    department,
+    professionalCertification,
+    handleFullNameChangeHP,
+    handleEmailChangeHP,
+    handleDateOfBirthChangeHP,
+    handlePhotoChangeHP,
+    handlePasswordChangeHP,
+    handleConfirmPasswordChangeHP,
+    handlePhoneNumberChangeHP,
+    handleAvailablity,
+    handleProfessionalCertification,
+    handleDepartment
+
+  }
 
 
   const values = {
@@ -126,6 +278,8 @@ function App() {
   return (
     <div className="App">
       <SignUpContext.Provider value={values}>
+        <SignUpHPContext.Provider value={valuesHP}>
+
         <Header />
         <Router>
           <Routes>
@@ -140,13 +294,15 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signupprofessional" element={<SignupProfessional />} />
 
-            <Route path="/account" element={<AccountPage />} />
+              <Route path="/account" element={<AccountPage />} />
+              <Route path='/admin' element={<Home />} />
 
 
           </Routes>
         </Router>
 
         <Footer />
+        </SignUpHPContext.Provider>
 
       </SignUpContext.Provider>
     </div>

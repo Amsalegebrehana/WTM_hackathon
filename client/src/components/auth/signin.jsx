@@ -2,8 +2,13 @@ import React, { useState } from "react";
 
 const SignIn = (props) => {
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+ }
+
     return (
-      <div className="Auth-form-container">
+      <div className="Auth-form-container" onSubmit={handleSubmit}>
         <form className="Auth-form">
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
@@ -42,13 +47,12 @@ const SignIn = (props) => {
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
+            <a href="/account">  <button type="submit" className="btn btn-primary">
                 Sign In
               </button>
+              </a>
             </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
+        
           </div>
         </form>
       </div>

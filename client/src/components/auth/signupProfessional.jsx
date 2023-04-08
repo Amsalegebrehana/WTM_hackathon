@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { SignUpHPContext } from './HealthProfessionalContext';
 import { Form } from "react-bootstrap";
 import Datetime from "react-datetime";
 // import { getAvailability } from './calendlyWidget';
@@ -7,55 +8,36 @@ import Datetime from "react-datetime";
 
 function SignupProfessional() {
    
-    const [errors, setErrors] = useState([]);
-    const [workingHours, setWorkingHours] = useState([]);
-    const [date, setDate] = useState(null);
-    // const [availability, setAvailability] = useState([]);
 
-    // async function handleDateChange(newDate) {
-    //     setDate(newDate);
-    //     const availability = await getAvailability(newDate);
-    //     setAvailability(availability);
-    // }
+    const {
+        fullNameHP,
+        emailHP,
+        dateOfBirthHP,
+        photoHP,
+        passwordHP,
+        confirmPasswordHP,
+        showProfileHP,
+        phoneNumberHP,
+        availability,
+        department,
+        professionalCertification,
+        handleFullNameChangeHP,
+        handleEmailChangeHP,
+        handleDateOfBirthChangeHP,
+        handlePhotoChangeHP,
+        handlePasswordChangeHP,
+        handleConfirmPasswordChangeHP,
+        handlePhoneNumberChangeHP,
+        handleAvailablity,
+        handleProfessionalCertification,
+        handleDepartment
+    } = useContext(SignUpHPContext);
+   
 
-    const [availability, setAvailability] = useState({
-        monday: { start: "", end: "" },
-        tuesday: { start: "", end: "" },
-        wednesday: { start: "", end: "" },
-        thursday: { start: "", end: "" },
-        friday: { start: "", end: "" },
-    });
+   
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Submit form data to backend
-    };
+   
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        const day = name.split("-")[0];
-        const key = name.split("-")[1];
-
-        setAvailability((prevState) => ({
-            ...prevState,
-            [day]: { ...prevState[day], [key]: value },
-        }));
-    };
-
-
-    const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
-        setAvailability((prevAvailability) => ({
-            ...prevAvailability,
-            [name]: checked,
-        }));
-    };
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     // Do something with the availability data
-    //     console.log(availability);
-    // };
     const [currentSection, setCurrentSection] = useState(1);
 
     const handleNextSection = () => {
@@ -90,6 +72,8 @@ function SignupProfessional() {
                                             className="form-control mt-1"
                                             placeholder="e.g Jane Doe"
                                             required
+                                            value={fullNameHP}
+                                            onChange={handleFullNameChangeHP}
                                         />
                                     </div>
                                     <div className="form-group mt-3">
@@ -99,6 +83,8 @@ function SignupProfessional() {
                                             className="form-control mt-1"
                                             placeholder="Email Address"
                                             required
+                                            value={emailHP}
+                                            onChange={handleEmailChangeHP}
                                         />
                                     </div>
 
@@ -108,8 +94,8 @@ function SignupProfessional() {
                                             type="date"
                                             name="datepic"
                                             placeholder="DateRange"
-                                            value={date}
-                                            onChange={(e) => setDate(e.target.value)}
+                                            value={dateOfBirthHP}
+                                            onChange={handleDateOfBirthChangeHP}
                                             required
                                         />
                                     </div>
@@ -121,14 +107,18 @@ function SignupProfessional() {
                                             className="form-control mt-1"
                                             placeholder="Password"
                                             required
+                                            value={passwordHP}
+                                            onChange={handlePasswordChangeHP}
                                         />
                                     </div>
                                     <div className="form-group mt-3">
                                         <label>Confirm Password</label>
                                         <input
-                                            type="Confirm Password"
+                                            type="password"
                                             className="form-control mt-1"
                                             placeholder="Confirm Password"
+                                            value={confirmPasswordHP}
+                                            onChange={handleConfirmPasswordChangeHP}
                                             required
                                         />
                                     </div>
@@ -161,7 +151,7 @@ function SignupProfessional() {
                                         id="monday-start"
                                         name="monday-start"
                                         value={availability.monday.start}
-                                            onChange={handleChange}
+                                            onChange={handleAvailablity}
                                             className='my-3'
                                     /><br/>
                                         <label htmlFor="monday-end" className='px-3'>Monday End</label>
@@ -170,7 +160,7 @@ function SignupProfessional() {
                                         id="monday-end"
                                         name="monday-end"
                                         value={availability.monday.end}
-                                        onChange={handleChange}
+                                            onChange={handleAvailablity}
                                         />
                                 </div>
                                 </div>
@@ -183,7 +173,7 @@ function SignupProfessional() {
                                         id="tuesday-start"
                                         name="tuesday-start"
                                         value={availability.tuesday.start}
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                         className='my-3'
                                     /><br/>
                                     <label htmlFor="tuesday-end" className='px-3'>Tuesday End</label>
@@ -192,7 +182,7 @@ function SignupProfessional() {
                                         id="tuesday-end"
                                         name="tuesday-end"
                                         value={availability.tuesday.end}
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     />
                                 </div>
 
@@ -204,7 +194,7 @@ function SignupProfessional() {
                                         name="wednesday-start"
                                         value={availability.wednesday.start}
                                         className='my-3'
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     /><br/>
                                     <label htmlFor="wednesday-end" className='px-3'>Wednesday End</label>
                                     <input
@@ -212,7 +202,7 @@ function SignupProfessional() {
                                         id="wednesday-end"
                                         name="wednesday-end"
                                         value={availability.wednesday.end}
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     />
                                 </div>
                                 <div className='p-3'>
@@ -223,7 +213,7 @@ function SignupProfessional() {
                                         name="thursday-start"
                                         value={availability.thursday.start}
                                         className='my-3'
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     /><br/>
                                     <label htmlFor="thursday-end" className='px-3'>Thursday End</label>
                                     <input
@@ -231,7 +221,7 @@ function SignupProfessional() {
                                         id="thursday-end"
                                         name="thursday-end"
                                         value={availability.thursday.end}
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     />
                                 </div>
                                 <div className='py-3'>
@@ -242,7 +232,7 @@ function SignupProfessional() {
                                         name="friday-start"
                                         value={availability.friday.start}
                                         className='my-3'
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     /><br />
                                     <label htmlFor="friday-end" className='px-3'>Friday End</label>
                                     <input
@@ -250,7 +240,7 @@ function SignupProfessional() {
                                         id="friday-end"
                                         name="friday-end"
                                         value={availability.friday.end}
-                                        onChange={handleChange}
+                                        onChange={handleAvailablity}
                                     />
                                 </div>
                                 
@@ -283,6 +273,8 @@ function SignupProfessional() {
                                                 className="form-control mt-1"
                                                 placeholder="Department"
                                                 required
+                                                value={department}
+                                                onChange={handleDepartment}
                                             />
                                         </div>
                                         <div className="form-group mt-5">
@@ -291,6 +283,8 @@ function SignupProfessional() {
                                                 type="file"
                                                 className="form-control mt-1"
                                                 required
+                                                // value={photoHP}
+                                                // onChange={handlePhotoChangeHP}
                                             />
                                         </div>
 
@@ -301,6 +295,8 @@ function SignupProfessional() {
                                                 type="file"
                                                 className="form-control mt-1"
                                                 required
+                                                //  value={professionalCertification}
+                                                // onChange={handleProfessionalCertification}
                                             />
                                         </div>
 

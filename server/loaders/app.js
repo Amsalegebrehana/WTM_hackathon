@@ -61,10 +61,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(process.cwd(), "public")));
 
 const userRouter = require("../api/user/router");
+const resourceRouter =  require("../api/resource/router");
 // Handle URL which don't exist
 
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/resource", resourceRouter);
 
 app.use("*", (req, res, next) => {
   return next(
